@@ -1,0 +1,8 @@
+---
+- hosts: all
+
+  tasks:
+
+  - name: Change Keyboard-Layout to "de-DE"
+    win_shell: Set-WinUserLanguageList -LanguageList de-DE -Force
+    #become_user: System

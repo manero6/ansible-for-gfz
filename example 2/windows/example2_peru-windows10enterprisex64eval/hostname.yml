@@ -1,0 +1,10 @@
+---
+- hosts: all
+  vars:
+    hostname: a-beautiful-hostname
+
+  tasks:
+
+  - name: Change Hostname
+    win_hostname:
+      name: "{{ hostname }}"

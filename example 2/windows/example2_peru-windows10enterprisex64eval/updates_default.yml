@@ -1,0 +1,12 @@
+---
+- hosts: all
+
+  tasks:
+
+  - name: Install Windows Updates and Reboot if needed
+    win_updates:
+      category_names:
+      - CriticalUpdates
+      - SecurityUpdates
+      - UpdatesRollups
+      reboot: yes

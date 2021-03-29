@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+  tasks:
+
+  - name: Install Base Software
+    win_chocolatey:
+      name:
+      - firefox
+      - 7zip
+      - thunderbird
+      - nextcloud-client
+      state: present

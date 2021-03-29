@@ -1,0 +1,50 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VM_BOX = ENV["VM_BOX"] || "peru/windows-10-enterprise-x64-eval"
+VM_RAM = ENV["VM_RAM"] || "1024"
+VM_CPU = ENV["VM_CPU"] || "2"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = VM_BOX
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provider "libvirt" do |lv|
+    lv.memory = VM_RAM
+    lv.cpus = VM_CPU
+  end
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = VM_RAM
+    vb.cpus = VM_CPU
+  end
+
+  config.vm.define "windows" do |vm|
+    vm.vm.hostname = "windows"
+    vm.vm.provision "hostname", type: "ansible" do |a|
+      a.playbook = "hostname.yml"
+    end
+    vm.vm.provision "users", type: "ansible" do |a|
+      a.playbook = "users.yml"
+    end
+    vm.vm.provision "old_admin", type: "ansible" do |a|
+      a.playbook = "rm_old_admin.yml"
+    end
+    vm.vm.provision "keyboard_layout", type: "ansible" do |a|
+      a.playbook = "keyboard_DE.yml"
+    end
+    vm.vm.provision "choco_base", type: "ansible" do |a|
+      a.playbook = "choco_base_software.yml"
+    end
+    vm.vm.provision "choco_additional", type: "ansible" do |a|
+      a.playbook = "choco_additional_software.yml"
+    end
+    vm.vm.provision "updates", type: "ansible" do |a|
+      a.playbook = "updates_default.yml"
+    end
+    vm.vm.provision "office2019_standard", type: "ansible" do |a|
+      a.playbook = "office2019_standard.yml"
+    end
+  end
+
+end
