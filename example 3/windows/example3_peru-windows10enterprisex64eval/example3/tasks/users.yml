@@ -1,0 +1,23 @@
+---
+- name: Create new Admin
+  win_user:
+    name: "{{ admin }}"
+    password: "{{ admin_pwd }}"
+    state: present
+    groups:
+    - Users
+    - Administrators
+
+- name: Create User
+  win_user:
+    name: "{{ user }}"
+    state: present
+    groups:
+    - Users
+
+- name: Create Additional User
+  win_user:
+    name: "{{ new_user }}"
+    state: present
+    groups:
+    - Users

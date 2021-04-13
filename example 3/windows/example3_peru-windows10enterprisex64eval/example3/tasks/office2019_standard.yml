@@ -1,0 +1,10 @@
+---
+- name: Office-2019 - Copy Standard Configuration XML
+  win_copy:
+    src: files/configuration_standard.xml
+    dest: 'C:\Users\vagrant\AppData\Local\office-tool\Office Tool\files\'
+
+#- name: Office-2019 - Install Standard Version
+#  win_shell: .\setup.exe /configure .\configuration_standard.xml
+#  args:
+#    chdir: 'C:\Users\vagrant\AppData\Local\office-tool\Office Tool\files'

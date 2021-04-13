@@ -1,0 +1,5 @@
+---
+- name: Remove old Admin
+  win_user:
+    name: "{{ old_admin }}"
+    state: absent

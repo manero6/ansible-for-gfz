@@ -1,0 +1,10 @@
+---
+# tasks file for example3
+- include_tasks: hostname.yml
+- include_tasks: users.yml
+#- include_tasks: rm_old_admin.yml
+- include_tasks: keyboard_DE.yml
+- include_tasks: choco_base_software.yml
+- include_tasks: choco_additional_software.yml
+- include_tasks: updates_default.yml
+- include_tasks: office2019_standard.yml

@@ -1,0 +1,10 @@
+---
+# vars file for example3
+
+hostname: a-beautiful-hostname
+
+admin: my-admin
+admin_pwd: password
+old_admin: Administrator
+user: my-user
+new_user: new-user

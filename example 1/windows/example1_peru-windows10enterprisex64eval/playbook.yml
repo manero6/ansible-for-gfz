@@ -1,25 +1,23 @@
 ---
 - hosts: all
-  vars_prompt:
-
-    - name: username
-      prompt: What username?
-      private: no
-
-    - name: hostname
-      prompt: What hostname?
-      private: no
+  vars:
+    hostname: a-beautiful-hostname
+    admin: my-admin
+    admin_pwd: password
+    user: my-user
+    new_user: new-user
+    old_admin: Administrator
 
   tasks:
 
   - name: Change Hostname
     win_hostname:
-      name: "{{ lookup('env', 'HOSTNAME') }}"
+      name: "{{ hostname }}"
 
   - name: Create new Admin
     win_user:
-      name: new_admin
-      password: password
+      name: "{{ admin }}"
+      password: "{{ admin_pwd }}"
       state: present
       groups:
       - Users
@@ -27,17 +25,23 @@
 
   - name: Create User
     win_user:
-      name: "{{ lookup('env', 'USERNAME') }}"
+      name: "{{ user }}"
       state: present
       groups:
       - Users
 
   - name: Create Additional User
     win_user:
-      name: new_user
+      name: "{{ new_user }}"
       state: present
       groups:
       - Users
+    old_admin: Administrator
+
+  - name: Remove old Admin
+    win_user:
+      name: "{{ old_admin }}"
+      state: absent
 
   - name: Change Keyboard-Layout to "de-DE"
     win_shell: Set-WinUserLanguageList -LanguageList de-DE -Force
@@ -46,6 +50,9 @@
   - name: Install Windows Updates and Reboot if needed
     win_updates:
       category_names:
+      - CriticalUpdates
+      - SecurityUpdates
+      - UpdatesRollups
       reboot: yes
 
   - name: Install Base Software

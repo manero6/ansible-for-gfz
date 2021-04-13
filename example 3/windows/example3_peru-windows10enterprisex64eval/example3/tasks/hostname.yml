@@ -1,0 +1,4 @@
+---
+- name: Change Hostname
+  win_hostname:
+    name: "{{ hostname }}"
