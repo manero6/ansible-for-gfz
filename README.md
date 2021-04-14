@@ -1,4 +1,20 @@
 # Vagrant for Ansible (GFZ)
+## How-To
+### Vagrant
+#### create a VM and execute Ansible Tasks
+`vagrant up`
+
+#### only create a VM
+`vagrant up --no-provision`
+
+#### execute Ansible Tasks on an already created VM
+`vagrant up --provision`
+
+#### destroy a VM
+`vagrant destroy`
+
+---
+
 ## Images
 ### Windows
 - [x] Peru's Windows 10 image
