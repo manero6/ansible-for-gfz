@@ -31,5 +31,6 @@ TODO
 #### macOS
 TODO (unlikely...)
 
-### macOS
+### QEMU/KVM/LibVirt
+#### macOS
 - https://github.com/kholia/OSX-KVM
