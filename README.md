@@ -1,4 +1,4 @@
-# Vagrant for Ansible (GFZ)
+# Ansible for GFZ
 ## How-To
 ### Vagrant
 #### create a VM and execute Ansible Tasks
@@ -15,8 +15,9 @@
 
 ---
 
-## Images
-### Windows
+## VMs
+### Vagrant Boxes
+#### Windows
 - [x] Peru's Windows 10 image
   - <https://app.vagrantup.com/peru/boxes/windows-10-enterprise-x64-eval>
   - LibVirt + VirtualBox
@@ -24,8 +25,11 @@
   - <https://app.vagrantup.com/Microsoft/boxes/EdgeOnWindows10>
   - VirtualBox
 
-### Linux
+#### Linux
 TODO
 
+#### macOS
+TODO (unlikely...)
+
 ### macOS
-TODO
+- https://github.com/kholia/OSX-KVM
