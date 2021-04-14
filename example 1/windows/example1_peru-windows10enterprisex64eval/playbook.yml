@@ -36,12 +36,14 @@
       state: present
       groups:
       - Users
-    old_admin: Administrator
 
-  - name: Remove old Admin
-    win_user:
-      name: "{{ old_admin }}"
-      state: absent
+#  - name: Remove old Admin
+#    win_user:
+#      name: "{{ old_admin }}"
+#      state: absent
+
+#  - name: Remove old Admin (Powershell)
+#    win_shell: TODO
 
   - name: Change Keyboard-Layout to "de-DE"
     win_shell: Set-WinUserLanguageList -LanguageList de-DE -Force

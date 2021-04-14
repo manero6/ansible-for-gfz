@@ -3,9 +3,10 @@ Playbook's tasks:
 - change hostname
   - reboot needed
 - create admin and users
-  - different group policies
+  - with different group policies
 - remove default admin
-  - not working
+  - not working with Ansible's `win_user` module
+  - trying with a PS script
 - change keyboard layout to de_DE
   - logout needed
 - software installation with Chocolatey
