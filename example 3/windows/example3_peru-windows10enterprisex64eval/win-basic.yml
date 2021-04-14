@@ -2,4 +2,4 @@
 - hosts: all
 
   roles:
-  - example3
+  - win-basic

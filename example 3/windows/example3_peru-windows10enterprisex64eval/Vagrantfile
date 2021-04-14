@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "windows" do |vm|
     vm.vm.hostname = "windows"
     vm.vm.provision "ansible" do |a|
-      a.playbook = "example3.yml"
+      a.playbook = "win-basic.yml"
     end
   end
 
