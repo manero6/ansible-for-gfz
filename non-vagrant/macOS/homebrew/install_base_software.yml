@@ -1,0 +1,19 @@
+---
+- name: Install Base Software
+  hosts: mac
+
+  tasks:
+
+  - name: Install Base Software
+    homebrew:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - firefox
+      - thunderbird
+      - htop
+      - nextcloud
+      - openconnect
+      - openconnect-gui
+      - microsoft-office
+      - p7zip
