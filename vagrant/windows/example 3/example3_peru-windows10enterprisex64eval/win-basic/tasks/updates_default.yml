@@ -1,8 +1,7 @@
 ---
 - name: Install Windows Updates and Reboot if needed
   win_updates:
-    category_names:
-    - CriticalUpdates
-    - SecurityUpdates
-    - UpdatesRollups
+    category_names: "{{ item }}"
     reboot: yes
+  loop:
+  - "{{ updates_default }}"

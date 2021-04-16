@@ -3,8 +3,36 @@
 
 hostname: a-beautiful-hostname
 
-admin: my-admin
-admin_pwd: password
+users:
+- name: my-admin
+  password: password
+  groups: 
+  - Administrators
+- name: my-user
+  password:
+  groups:
+  - Users
+  - Administrators
+- name: new-user
+  password:
+  groups:
+  - Users
+
 old_admin: Administrator
-user: my-user
-new_user: new-user
+
+choco_base:
+  - firefox
+  - 7zip
+  - thunderbird
+  - nextcloud-client
+
+choco_additional:
+  - office-tool
+  - chromium
+  - zoom
+#  - webex-meetings
+
+updates_default:
+  - CriticalUpdates
+  - SecurityUpdates
+  - UpdatesRollups

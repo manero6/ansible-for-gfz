@@ -1,9 +1,7 @@
 ---
 - name: Install Additional Software
   win_chocolatey:
-    name:
-    - office-tool
-    - chromium
-    - zoom
-    #- webex-meetings
+    name: "{{ item }}"
     state: present
+  loop:
+  - "{{ choco_additional }}"

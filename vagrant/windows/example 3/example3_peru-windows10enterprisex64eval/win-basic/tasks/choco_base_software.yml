@@ -1,9 +1,8 @@
 ---
 - name: Install Base Software
   win_chocolatey:
-    name:
-    - firefox
-    - 7zip
-    - thunderbird
-    - nextcloud-client
+    name: "{{ item }}"
     state: present
+  loop:
+  - "{{ choco_base }}"
+
