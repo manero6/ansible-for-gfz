@@ -2,11 +2,15 @@
 - hosts: all
   vars:
     hostname: a-beautiful-hostname
-    admin: my-admin
-    admin_pwd: password
+
+#    admin: my-admin
+#    admin_pwd: password
     user: my-user
     new_user: new-user
+
     old_admin: Administrator
+    new_admin: new-admin
+    new_admin_pwd: password
 
   tasks:
 
@@ -14,16 +18,16 @@
     win_hostname:
       name: "{{ hostname }}"
 
-  - name: Create new Admin
-    win_user:
-      name: "{{ admin }}"
-      password: "{{ admin_pwd }}"
-      state: present
-      groups:
-      - Users
-      - Administrators
+#  - name: Create my Admin
+#    win_user:
+#      name: "{{ admin }}"
+#      password: "{{ admin_pwd }}"
+#      state: present
+#      groups:
+#      - Users
+#      - Administrators
 
-  - name: Create User
+  - name: Create my User
     win_user:
       name: "{{ user }}"
       state: present
@@ -42,8 +46,18 @@
 #      name: "{{ old_admin }}"
 #      state: absent
 
-#  - name: Remove old Admin (Powershell)
-#    win_shell: TODO
+  - name: Rename and Activate default Administrator (Powershell)
+    win_shell: |
+      $old_admin = "{{ old_admin }}"
+      $new_admin = "{{ new_admin }}"
+      $new_admin_pwd = "{{ new_admin_pwd }}"
+
+      if ( Get-LocalUser $old_admin )
+      {
+        Rename-LocalUser -Name $old_admin -NewName $new_admin
+        Enable-LocalUser -Name $new_admin
+        Set-LocalUser -Name $new_admin -Password ( ConvertTo-SecureString $new_admin_pwd -AsPlainText -Force ) -PasswordNeverExpires $true
+      } else { exit }
 
   - name: Change Keyboard-Layout to "de-DE"
     win_shell: Set-WinUserLanguageList -LanguageList de-DE -Force

@@ -4,10 +4,10 @@
 hostname: a-beautiful-hostname
 
 users:
-- name: my-admin
-  password: password
-  groups: 
-  - Administrators
+#- name: my-admin
+#  password: password
+#  groups: 
+#  - Administrators
 - name: my-user
   password:
   groups:
@@ -19,6 +19,8 @@ users:
   - Users
 
 old_admin: Administrator
+new_admin: new-admin
+new_admin_pwd: password
 
 choco_base:
   - firefox

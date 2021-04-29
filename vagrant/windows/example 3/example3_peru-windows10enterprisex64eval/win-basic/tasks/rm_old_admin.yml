@@ -4,5 +4,15 @@
 #    name: "{{ old_admin }}"
 #    state: absent
 
-- name: Remove old Admin (Powershell)
-  win_shell: TODO
+- name: Rename and Activate the default Administrator (Powershell)
+  win_shell: |
+    $old_admin = "{{ old_admin }}"
+    $new_admin = "{{ new_admin }}"
+    $new_admin_pwd = "{{ new_admin_pwd }}"
+
+    if ( Get-LocalUser $old_admin )
+    {
+      Rename-LocalUser -Name $old_admin -NewName $new_admin
+      Enable-LocalUser -Name $new_admin
+      Set-LocalUser -Name $new_admin -Password ( ConvertTo-SecureString $new_admin_pwd -AsPlainText -Force ) -PasswordNeverExpires $true
+    } else { exit }
