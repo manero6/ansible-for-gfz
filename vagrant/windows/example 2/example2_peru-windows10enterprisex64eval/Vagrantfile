@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
       a.playbook = "users.yml"
     end
     vm.vm.provision "old_admin", type: "ansible" do |a|
-      a.playbook = "rm_old_admin.yml"
+      a.playbook = "old_admin.yml"
     end
     vm.vm.provision "keyboard_layout", type: "ansible" do |a|
       a.playbook = "keyboard_DE.yml"
