@@ -10,4 +10,5 @@
       - 7zip
       - thunderbird
       - nextcloud-client
+      - chocolateygui
       state: present

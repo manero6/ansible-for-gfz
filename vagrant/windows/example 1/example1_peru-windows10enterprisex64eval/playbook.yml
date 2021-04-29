@@ -78,6 +78,7 @@
       - 7zip
       - thunderbird
       - nextcloud-client
+      - chocolateygui
       state: present
 
   - name: Install Additional Software

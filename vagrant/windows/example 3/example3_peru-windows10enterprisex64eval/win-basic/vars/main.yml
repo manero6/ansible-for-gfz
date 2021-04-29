@@ -27,6 +27,7 @@ choco_base:
   - 7zip
   - thunderbird
   - nextcloud-client
+  - chocolateygui
 
 choco_additional:
   - office-tool
