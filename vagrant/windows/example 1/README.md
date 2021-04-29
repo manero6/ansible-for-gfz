@@ -1,5 +1,6 @@
 # Example 1
 Playbook's tasks:
+- Prevent VM from going to sleep/hibernation
 - change hostname
   - in use after a reboot
 - create admins and users

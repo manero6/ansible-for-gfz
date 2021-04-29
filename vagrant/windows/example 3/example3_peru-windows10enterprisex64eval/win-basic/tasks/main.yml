@@ -1,5 +1,6 @@
 ---
 # tasks file for win-basic
+- include_tasks: disable_sleep_hibernation.yml
 - include_tasks: hostname.yml
 - include_tasks: users.yml
 - include_tasks: old_admin.yml

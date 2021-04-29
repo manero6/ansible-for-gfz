@@ -21,6 +21,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "windows" do |vm|
     vm.vm.hostname = "windows"
+    vm.vm.provision "disable_sleep", type: "ansible" do |a|
+      a.playbook = "disable_sleep_hibernation.yml"
+    end
     vm.vm.provision "hostname", type: "ansible" do |a|
       a.playbook = "hostname.yml"
     end
