@@ -1,0 +1,8 @@
+---
+- hosts: all
+  
+  tasks:
+
+  - name: Shutting down
+    win_command:
+      shutdown /s /t 10 /c "Ihr Gerät wird heruntergefahren - Shutting down your device"
