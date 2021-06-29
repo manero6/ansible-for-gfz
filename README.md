@@ -1,4 +1,9 @@
 # Ansible for GFZ
+
+Showcasing a few simple Ansible playbooks.
+
+Using Vagrant to automate the tedious and time-consuming tasks.
+
 ## How-To
 ### Vagrant
 #### create a VM and execute Ansible Tasks
