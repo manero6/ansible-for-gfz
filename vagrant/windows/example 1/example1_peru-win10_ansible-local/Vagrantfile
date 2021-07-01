@@ -5,13 +5,10 @@ VM_BOX = ENV["VM_BOX"] || "peru/windows-10-enterprise-x64-eval"
 VM_RAM = ENV["VM_RAM"] || "1024"
 VM_CPU = ENV["VM_CPU"] || "2"
 
-N = ENV["N"] || 3
-#N = 3
-
 Vagrant.configure("2") do |config|
 
   config.vm.box = VM_BOX
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant", disabled: false
 
   config.vm.provider "libvirt" do |lv|
     lv.memory = VM_RAM
@@ -22,10 +19,10 @@ Vagrant.configure("2") do |config|
     vb.cpus = VM_CPU
   end
 
-  (1..N.to_i).each do |a|
-    config.vm.define "windows-#{a}" do |vm|
-      vm.vm.hostname = "windows"
-      vm.vm.network "private_network", ip: "192.168.121.18#{a}"
+  config.vm.define "windows" do |vm|
+    vm.vm.hostname = "windows"
+    vm.vm.provision "ansible_local" do |a|
+      a.playbook = "playbook.yml"
     end
   end
 

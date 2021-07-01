@@ -1,0 +1,112 @@
+---
+- hosts: all
+  vars:
+    hostname: a-beautiful-hostname
+
+#    admin: my-admin
+#    admin_pwd: password
+    user: my-user
+    new_user: new-user
+
+    old_admin: Administrator
+    new_admin: new-admin
+    new_admin_pwd: password
+
+  tasks:
+
+  - name: Disable Sleep and Hibernation
+    win_shell: |
+      powercfg.exe -x -monitor-timeout-ac 0
+      powercfg.exe -x -monitor-timeout-dc 0
+      powercfg.exe -x -disk-timeout-ac 0
+      powercfg.exe -x -disk-timeout-dc 0
+      powercfg.exe -x -standby-timeout-ac 0
+      powercfg.exe -x -standby-timeout-dc 0
+      powercfg.exe -x -hibernate-timeout-ac 0
+      powercfg.exe -x -hibernate-timeout-dc 0
+
+  - name: Change Hostname
+    win_hostname:
+      name: "{{ hostname }}"
+
+#  - name: Create my Admin
+#    win_user:
+#      name: "{{ admin }}"
+#      password: "{{ admin_pwd }}"
+#      state: present
+#      groups:
+#      - Users
+#      - Administrators
+
+  - name: Create my User
+    win_user:
+      name: "{{ user }}"
+      state: present
+      groups:
+      - Users
+
+  - name: Create Additional User
+    win_user:
+      name: "{{ new_user }}"
+      state: present
+      groups:
+      - Users
+
+#  - name: Remove old Admin
+#    win_user:
+#      name: "{{ old_admin }}"
+#      state: absent
+
+  - name: Rename and Activate default Administrator (Powershell)
+    win_shell: |
+      $old_admin = "{{ old_admin }}"
+      $new_admin = "{{ new_admin }}"
+      $new_admin_pwd = "{{ new_admin_pwd }}"
+
+      if ( Get-LocalUser $old_admin )
+      {
+        Rename-LocalUser -Name $old_admin -NewName $new_admin
+        Enable-LocalUser -Name $new_admin
+        Set-LocalUser -Name $new_admin -Password ( ConvertTo-SecureString $new_admin_pwd -AsPlainText -Force ) -PasswordNeverExpires $true
+      } else { exit }
+
+  - name: Change Keyboard-Layout to "de-DE"
+    win_shell: Set-WinUserLanguageList -LanguageList de-DE -Force
+    #become_user: System
+
+  - name: Install Base Software
+    win_chocolatey:
+      name:
+      - firefox
+      - 7zip
+      - thunderbird
+      - nextcloud-client
+      - chocolateygui
+      state: present
+
+  - name: Install Additional Software
+    win_chocolatey:
+      name:
+      - office-tool
+      - chromium
+      - zoom
+      #- webex-meetings
+      state: present
+
+  - name: Office-2019 - Copy Standard Configuration XML
+    win_copy:
+      src: ./configuration_standard.xml
+      dest: 'C:\Users\vagrant\AppData\Local\office-tool\Office Tool\files\'
+
+  - name: Office-2019 - Install Standard Version
+    win_shell: .\setup.exe /configure .\configuration_standard.xml
+    args:
+      chdir: 'C:\Users\vagrant\AppData\Local\office-tool\Office Tool\files'
+
+  - name: Install Windows Updates and Reboot if needed
+    win_updates:
+      category_names:
+      - CriticalUpdates
+      - SecurityUpdates
+      - UpdatesRollups
+      reboot: yes

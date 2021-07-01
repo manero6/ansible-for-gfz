@@ -161,9 +161,9 @@ ansible_connection=winrm
 # Vagrant
 ## how-to Vagrant
 
-- change directory to a Vagrantfile is
+- change directory to where a Vagrantfile is
   - `cd /path/to/Vagrantfile`
-- create a VM (with provisioning if present in the Vagrantfile)
+- create a VM (with provisioning, if present in the Vagrantfile)
   - `vagrant up`
 - stop the VM
   - `vagrant halt`
