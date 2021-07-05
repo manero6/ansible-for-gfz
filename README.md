@@ -21,14 +21,12 @@ Using Vagrant to automate the tedious and time-consuming tasks.
 ---
 
 ## VMs
-### Vagrant Boxes
+### Vagrant
 #### Windows
-- [x] Peru's Windows 10 image
+- Peru's Windows 10 image
   - <https://app.vagrantup.com/peru/boxes/windows-10-enterprise-x64-eval>
   - LibVirt + VirtualBox
-- [ ] Microsoft's Windows 10 for Edge
-  - <https://app.vagrantup.com/Microsoft/boxes/EdgeOnWindows10>
-  - VirtualBox
+  - Ansible ready (WinRM already active)
 
 #### Linux
 TODO
